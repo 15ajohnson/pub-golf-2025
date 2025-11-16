@@ -1,0 +1,392 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+/* Use VT323 for headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'VT323', monospace !important;
+  margin: 1.5rem 0 0.5rem 0 !important;
+  color: white !important;
+}
+
+p {
+  margin: 0 !important;
+  color: #d4dbe0 !important;
+  padding-top: 10px !important;
+}
+
+ol, ul {
+  color: #d4dbe0 !important;
+}
+
+ol li, ul li {
+  color: #d4dbe0 !important;
+}
+
+/* Center all lists within section-box */
+.section-box ul {
+  display: block !important;
+  width: fit-content !important;
+  text-align: left !important;
+}
+
+.section-box ol {
+  display: block !important;
+  width: fit-content !important;
+  text-align: left !important;
+}
+
+.markdown-section ol, .markdown-section ul {
+    padding-left: 15% !important;
+    padding-right: 15% !important;
+}
+
+/* Event rarity colors */
+.event-common {
+  color: #4ade80 !important; /* Green for common events */
+}
+
+.event-uncommon {
+  color: #fbbf24 !important; /* Yellow for uncommon events */
+}
+
+.event-rare {
+  color: #ef4444 !important; /* Red for rare events */
+}
+
+/* Page background image (override previous background-color) */
+.sidebar, body {
+  background-color: #2d2f2e !important;
+}
+
+span {
+  color: white !important;
+}
+
+/* Navbar styling - horizontal layout */
+nav.app-nav ul {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 1rem !important;
+  align-items: center !important;
+}
+
+nav.app-nav li {
+  display: inline-block !important;
+  margin: 0 !important;
+}
+
+/* External stylesheet for docs/index.html */
+.logo {
+  max-width: 540px;
+  width: 100%;
+}
+
+.mask {
+  background-color: #72635773 !important;
+}
+
+/* Basic retro button styling */
+.retro-blink-button {
+  /* blink color variables (changed on hover) */
+  --blink-color: white;
+  --blink-hidden: rgba(255,255,255,0);
+
+  font-family: 'VT323', monospace !important;
+  font-size: 1.5rem !important;
+  letter-spacing: 0.06em !important;
+  background-color: #2c3e50e0 !important;
+  border: 2px solid #87a0a18a !important;
+  border-radius: 13px !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  box-shadow: 0 0 12px #ffffff00 !important;
+  transition: box-shadow 220ms ease, background-color 150ms ease;
+}
+
+/* Blink only the button text — wrap text in <span class="blink-text">Label</span> */
+.retro-blink-button .blink-text {
+  display: inline-block;
+  animation: blink-text 1s steps(1, start) infinite;
+  color: white;
+}
+
+@keyframes blink-text {
+  0%, 100% { color: var(--blink-color); }
+  50%      { color: var(--blink-hidden); }
+}
+
+/* Change blink color on hover while preserving blink behavior */
+.retro-blink-button:hover {
+  /* keep the glow on hover, do not move the button */
+  box-shadow: 0 0 12px #0002ff !important;
+  background-color: #2c3e50 !important; /* make background fully opaque on hover */
+}
+
+/* Make pure-Markdown links with the button class blink like the span previously did */
+section.cover .cover-main a.retro-blink-button {
+  animation: blink-text 1s steps(1, start) infinite  !important;
+}
+
+.content-header {
+  margin: 0.75rem auto;
+  text-align: center;
+}
+
+/* New styles for header image in .content-header */
+.content-header-img {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Participants photo layout (flex-based) */
+.participants-grid {
+  --gap: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0 auto;
+  max-width: calc(3 * 200px + 2 * var(--gap));
+}
+
+/* Each flex child is the participant-card (figure) */
+.participants-grid > .participant-card {
+  box-sizing: border-box;
+  flex: 0 0 calc((100% - 2 * var(--gap)) / 3);
+  max-width: calc((100% - 2 * var(--gap)) / 3);
+}
+
+.participant-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  max-width: 200px; /* enforce maximum width per participant image */
+  margin: 0 auto 8px;
+}
+
+/* Responsive: two columns on small screens */
+@media (max-width: 640px) {
+  .participants-grid {
+    max-width: 100%;
+  }
+  .participants-grid > .participant-card {
+    flex: 0 0 45%;
+    max-width: 45%;
+  }
+}
+
+/* Participant card & caption styles */
+.participant-card {
+  text-align: center;
+  width: 100%;
+  max-width: 200px;
+}
+
+/* Center standalone participant cards (not in grid) */
+.section-box > .participant-card {
+  margin: 1rem auto;
+  display: block;
+}
+
+.participant-card img {
+  display: block;
+  margin: 0 auto 8px;
+}
+
+.participant-card figcaption {
+  color: #ffffffcc;
+  font-size: 0.9rem;
+}
+
+.participant-card .participant-name {
+  display: block;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.participant-card .participant-desc {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+/* Retro pixel-art frame for the main markdown content area (CSS-only stepped effect) */
+.markdown-section {
+  position: relative;
+  padding: 1.25rem;
+  background: rgba(0,0,0,0.45);
+  border: none; /* remove solid border to avoid flat line */
+  /* stacked box-shadows produce a stepped, pixel-like frame outward from the content */
+  box-shadow: inset 0 0 0 4px #87a0a1, 0 0 0 6px #739597, 6px 6px 0 0 #000000, 12px 12px 0 0 #071216, 18px 18px 0 0 #000000;
+}
+
+.markdown-section > * { position: relative; z-index: 1; }
+
+/* Section wrapper for h2 and content */
+.section-box {
+  position: relative;
+  padding: 1.5rem;
+  margin: 2rem auto;
+  max-width: 720px !important;
+  background: rgba(0, 0, 0, 0);
+  border: 2px solid transparent;
+  border-radius: 4px;
+  background-clip: padding-box;
+}
+
+.section-box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  padding: 2px;
+  background: 
+    linear-gradient(114deg, #8FBFCB 0%, #C3DBE5 25% 25%, #FFB870 50%, #FF9AC1 75%, #FFB870 100%) top,
+    linear-gradient(90deg, #8FBFCB 0%, #C3DBE5 25%, #FFB870 50%, #FF9AC1 75%, #FFB870 100%) bottom;
+  background-size: 100% 2px, 100% 2px;
+  background-repeat: no-repeat;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.section-box h2 {
+  margin-top: 2rem !important;
+  text-align: center;
+  font-weight: lighter;
+}
+
+.section-box h2:first-of-type {
+  margin-top: 0 !important;
+}
+
+.markdown-section a {
+  font-weight: lighter !important;
+}
+
+/* Route flex container */
+.route-container {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.route-map {
+  flex: 1;
+  max-width: 640px;
+}
+
+.route-map iframe {
+  width: 100%;
+  height: 480px;
+  border: none;
+}
+
+.route-list {
+  flex: 0 0 auto;
+  min-width: 250px;
+}
+
+.route-list ol {
+  margin: 0 !important;
+  padding-left: 1.5rem !important;
+}
+
+/* Grid layout for info items */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 1rem 0rem 2rem 0rem;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.info-item h3 {
+  margin-bottom: 0.5rem !important;
+}
+
+.info-item p {
+  margin: 0 !important;
+}
+
+h3 {
+  text-align: center !important;
+  font-weight: lighter !important;
+  text-decoration: underline !important;
+  text-decoration-color: #a2c9d5 !important;
+  text-decoration-thickness: 1px !important;
+  text-underline-offset: 4px !important;
+}
+
+h3 a {
+  text-decoration: inherit !important;
+  text-decoration-color: inherit !important;
+}
+
+/* Center all paragraphs within section-box */
+.section-box p {
+  text-align: center !important;
+}
+
+h1 {
+  text-align: center;
+  font-size: 3rem !important;
+}
+
+.header-info {
+  margin-left: 20% !important;
+  margin-right: 20% !important;
+  margin-bottom: 0 !important;
+  margin-top: 20px !important;
+  text-align: center;
+  color: white;
+}
+
+/* Reduce margins on mobile for header-info */
+@media (max-width: 768px) {
+  .header-info {
+    margin-left: 5% !important;
+    margin-right: 5% !important;
+  }
+  
+  .section-box {
+    margin: 1rem 0 !important;
+    padding: 1rem !important;
+  }
+  
+  h1 {
+    font-size: 2.3rem !important;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .markdown-section {
+    max-width: 89% !important;
+  }
+  
+  .route-container {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .route-map iframe {
+    height: 300px;
+  }
+
+  .markdown-section ol, .markdown-section ul {
+    padding-left: 5% !important;
+    padding-right: 5% !important;
+  }
+}

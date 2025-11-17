@@ -50,19 +50,19 @@ We have decided to give some information on the event before it begins. We hope 
 
 ### Power Ups
 
-At the start of the event, each player will be allowed to choose a Power Up. These Power Ups are all beneficial to the player in some way, and there are no limits to who can choose which Power Up (all players could choose the same Power Up, for example). The Power Up can be used once during any point in the challenge.
+At the start of the event, each player will be allowed to choose a Power Up. These Power Ups are all beneficial to the player in some way, and there are no limits to who can choose which Power Up (all players could choose the same Power Up, for example). The Power Up can be used only once during any point in the day.
 
 ### Other Events
 
 Each bar stop will consist of the following events:
 <ol>
-  <li>A Random Event will be chosen at the end of each bar</li>
+  <li>A Random Event will be chosen at the end of each bar, this event will apply to the next bar</li>
   <li>A drink challenge of some variety will occur at each bar</li>
 </ol>
 
 ### Random Events
 
-Before each bar, every participant will draw a random event. These events range from helpful to mildly inconvenient to challenging. Each event has a different probability of occurring: green events are common, yellow events are uncommon, and red events are rare.
+At the end of each bar, every participant will draw a random event. These events range from helpful to mildly inconvenient to challenging. Each event has a different probability of occurring: green events are common, yellow events are uncommon, and red events are rare. The event will apply to the next bar on our route. 
 
 <ul>
   <li class="event-common">Banana — Stand on one leg and finish your next drink without support (+1 if you fail)</li>

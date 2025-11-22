@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
 /* Use VT323 for headings */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'VT323', monospace !important;
@@ -69,6 +75,7 @@ nav.app-nav ul {
   gap: 1rem !important;
   align-items: center;
   justify-content: flex-end;
+  padding: 5px 10px;
 }
 
 nav.app-nav li {
@@ -85,6 +92,14 @@ nav.app-nav a img {
   height: 24px !important;
   width: auto !important;
   vertical-align: middle !important;
+}
+
+.app-nav.no-badge {
+    margin-right: 0px !important;
+}
+
+.app-nav {
+    margin: 0px !important;
 }
 
 nav.app-nav a:hover,
@@ -157,6 +172,10 @@ section.cover .cover-main a.retro-blink-button {
   margin: 0 auto;
   width: 100%;
   max-width: 600px;
+}
+
+.content {
+  padding: 0px !important
 }
 
 /* Participants photo layout (flex-based) */
@@ -233,14 +252,16 @@ section.cover .cover-main a.retro-blink-button {
   opacity: 0.9;
 }
 
-/* Add space for navbar */
-main {
-  padding-top: 100px !important;
-}
-
 nav.app-nav {
   max-height: 100px !important;
   overflow: hidden !important;
+  background: #2d2f2e;
+  width: 100%;
+  position: static !important;
+}
+
+.markdown-section iframe {
+  margin: 0 !important;
 }
 
 /* Retro pixel-art frame for the main markdown content area (CSS-only stepped effect) */
@@ -262,6 +283,35 @@ nav.app-nav {
   background: transparent !important;
   box-shadow: none !important;
   padding: 0 !important;
+  height: 85% !important;
+}
+
+/* Hide body overflow for scorecard, quiz, and trivia pages */
+body:has(#scorecard-page),
+body:has(#quiz-page),
+body:has(#trivia-page) {
+  overflow: hidden !important;
+  overflow-x: hidden !important;
+}
+
+/* Hide main overflow and set height for scorecard, quiz, and trivia pages */
+main:has(#scorecard-page),
+main:has(#quiz-page),
+main:has(#trivia-page) {
+  overflow: hidden !important;
+  height: 100vh !important;
+}
+
+section:has(#scorecard-page),
+section:has(#quiz-page),
+section:has(#trivia-page) {
+  height: 100% !important;
+}
+
+article:has(#scorecard-page),
+article:has(#quiz-page),
+article:has(#trivia-page) {
+  height: 100% !important;
 }
 
 /* Override section-box styling for scorecard, quiz, and trivia pages */
@@ -444,8 +494,9 @@ h1 {
     grid-template-columns: 1fr;
   }
 
-  .markdown-section {
+  .markdown-section:not(:has(#scorecard-page)):not(:has(#quiz-page)):not(:has(#trivia-page)) {
     max-width: 89% !important;
+    margin-top: 20px !important;
   }
   
   .route-container {
@@ -467,6 +518,8 @@ h1 {
   .markdown-section:has(#quiz-page),
   .markdown-section:has(#trivia-page) {
     max-width: 100% !important;
+    width: 100% !important;
+    height: 75% !important;
   }
   
   /* Override section-box mobile styles for scorecard, quiz, and trivia pages */

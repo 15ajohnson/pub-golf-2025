@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pub Golf 2025 Quiz</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'VT323', monospace;
+      background: linear-gradient(135deg, #8FBFCB 0%, #C3DBE5 50%, #FFB870 100%);
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 20px;
+    }
+    
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 30px;
+      max-width: 700px;
+      width: 100%;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    
+    h1 {
+      text-align: center;
+      color: #2d2f2e;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    
+    .subtitle {
+      text-align: center;
+      color: #666;
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+    
+    .question-container {
+      margin-bottom: 30px;
+    }
+    
+    .question-number {
+      color: #4ade80;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    
+    .question-text {
+      font-size: 1.3rem;
+      color: #2d2f2e;
+      margin-bottom: 15px;
+      line-height: 1.4;
+    }
+    
+    .answer-option {
+      background: #f5f5f5;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1.2rem;
+    }
+    
+    .answer-option:hover {
+      background: #e8f5e9;
+      border-color: #4ade80;
+    }
+    
+    .answer-option.selected {
+      background: #4ade80;
+      border-color: #22c55e;
+      color: white;
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #FF9AC1, #FFB870);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.5rem;
+      font-family: 'VT323', monospace;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 12px rgba(255, 154, 193, 0.4);
+      margin-top: 20px;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255, 154, 193, 0.6);
+    }
+    
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .result-container {
+      display: none;
+      text-align: center;
+    }
+    
+    .result-character {
+      font-size: 3rem;
+      color: #4ade80;
+      margin: 20px 0;
+    }
+    
+    .result-drink {
+      font-size: 2rem;
+      color: #2d2f2e;
+      margin: 20px 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #FFB870, #FF9AC1);
+      border-radius: 8px;
+      color: white;
+    }
+    
+    .result-text {
+      font-size: 1.3rem;
+      color: #666;
+      margin: 15px 0;
+    }
+    
+    .progress {
+      text-align: center;
+      color: #666;
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+    
+    .password-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #8FBFCB 0%, #C3DBE5 50%, #FFB870 100%);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 100px;
+      z-index: 9999;
+    }
+    
+    .password-box {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 40px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+    
+    .password-box h2 {
+      color: #2d2f2e;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    
+    .password-box p {
+      color: #666;
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+    
+    .password-box input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #87a0a1;
+      border-radius: 6px;
+      font-size: 1.2rem;
+      font-family: 'VT323', monospace;
+      margin-bottom: 15px;
+    }
+    
+    .password-box input:focus {
+      outline: none;
+      border-color: #4ade80;
+    }
+    
+    .password-error {
+      color: #ef4444;
+      font-size: 1.1rem;
+      margin-top: 10px;
+      display: none;
+    }
+    
+    @media (max-width: 640px) {
+      .container {
+        padding: 20px;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .answer-option {
+        font-size: 1.1rem;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="password-overlay" id="passwordOverlay">
+    <div class="password-box">
+      <h2>🔒 ENTER PASSWORD</h2>
+      <input type="password" id="passwordInput" placeholder="Enter password..." onkeypress="if(event.key === 'Enter') checkPassword()">
+      <button class="btn" onclick="checkPassword()">UNLOCK</button>
+      <div class="password-error" id="passwordError">❌ Incorrect phrase</div>
+    </div>
+  </div>
+  
+  <div class="container">
+    <h1>🎮 Personality Quiz 🎮</h1>
+    
+    <div id="quizContainer">
+      <div class="progress" id="progress"></div>
+      <div id="questionContainer"></div>
+      <button class="btn" id="nextBtn" onclick="nextQuestion()">Next Question</button>
+    </div>
+    
+    <div class="result-container" id="resultContainer">
+      <h2>Your Result</h2>
+      <div class="result-character" id="resultCharacter"></div>
+      <div class="result-drink" id="resultDrink"></div>
+      <p class="result-text">Head to the bar and order your drink!</p>
+    </div>
+  </div>
+
+  <script>
+    const PASSWORD = "pins2025";
+    
+    function checkPassword() {
+      const input = document.getElementById('passwordInput').value.toLowerCase().trim();
+      const error = document.getElementById('passwordError');
+      
+      if (input === PASSWORD.toLowerCase()) {
+        document.getElementById('passwordOverlay').style.display = 'none';
+        error.style.display = 'none';
+      } else {
+        error.style.display = 'block';
+        document.getElementById('passwordInput').value = '';
+        document.getElementById('passwordInput').focus();
+      }
+    }
+    
+    const questions = [
+      {
+        number: 1,
+        text: "You find a mysterious block with a question mark on it. What does a person do?",
+        answers: [
+          { text: "Punch it immediately—they can't wait to see what's inside.", char: "A" },
+          { text: "Gently nudge it with their foot first, just in case it's a Piranha Plant.", char: "B" },
+          { text: "Observe it carefully to see if they can figure out its purpose before acting.", char: "C" },
+          { text: "Smash it with authority. They deserve whatever is in it.", char: "D" },
+          { text: "Lick it. It might be delicious.", char: "E" },
+          { text: "Take a picture of it for documentation purposes and move on.", char: "F" }
+        ]
+      },
+      {
+        number: 2,
+        text: "You and a friend arrive at a huge feast with an elaborate cake. What is the reaction?",
+        answers: [
+          { text: "Make sure everyone else gets a slice before taking yours.", char: "A" },
+          { text: "Hope there's enough room left at the table.", char: "B" },
+          { text: "Compliment the chef on the exquisite presentation.", char: "C" },
+          { text: "Complain that it's not big enough for royalty such as themselves.", char: "D" },
+          { text: "Immediately start eating your slice and maybe eye your friend's slice, too.", char: "E" },
+          { text: "Note the sugar content and nutritional value of the cake.", char: "F" }
+        ]
+      },
+      {
+        number: 3,
+        text: "A large, slightly spooky house is blocking the path. How is it handled?",
+        answers: [
+          { text: "Enter without hesitation; danger is part of the adventure.", char: "A" },
+          { text: "Reluctantly go in, but only if someone else goes first.", char: "B" },
+          { text: "Search for a diplomatic or peaceful way around the conflict.", char: "C" },
+          { text: "Try to knock the house down—brute force is best.", char: "D" },
+          { text: "Check the nearby bushes for a secret path around it.", char: "E" },
+          { text: "Try to find the architectural blueprints of the house.", char: "F" }
+        ]
+      },
+      {
+        number: 4,
+        text: "What is the preferred mode of transportation?",
+        answers: [
+          { text: "Whatever gets you there fastest to save the day.", char: "A" },
+          { text: "A reliable but safe vehicle that doesn't go too fast.", char: "B" },
+          { text: "A comfortable, luxurious ride.", char: "C" },
+          { text: "A massive, intimidating vehicle that makes a statement.", char: "D" },
+          { text: "Relying on a loyal friend to give you a lift.", char: "E" },
+          { text: "Walking, you prefer to take in the scenery and stay alert.", char: "F" }
+        ]
+      },
+      {
+        number: 5,
+        text: "You're in a race. As you approach the final lap, you are in second place. What is the final strategy?",
+        answers: [
+          { text: "Focus on your driving skills; you'll win through pure ability.", char: "A" },
+          { text: "Hope the person in first makes a mistake.", char: "B" },
+          { text: "Use a smart item at the perfect moment to gain a decisive advantage.", char: "C" },
+          { text: "Aggressively bump the leader off the road.", char: "D" },
+          { text: "Eat a snack to gain a sudden burst of energy.", char: "E" },
+          { text: "You probably got lost on the second lap and are just trying to finish.", char: "F" }
+        ]
+      },
+      {
+        number: 6,
+        text: "Your friend is in trouble. What is the immediate plan?",
+        answers: [
+          { text: "Charge in headfirst, punching every enemy in the way.", char: "A" },
+          { text: "Develop a quick, clever scheme to distract the enemy while you sneak in.", char: "B" },
+          { text: "Try to negotiate a peaceful resolution.", char: "C" },
+          { text: "Yell and make a big display of strength to scare off the danger.", char: "D" },
+          { text: "Use your unique abilities to help your friend escape safely.", char: "E" },
+          { text: "Offer helpful advice from a safe distance before stepping in.", char: "F" }
+        ]
+      },
+      {
+        number: 7,
+        text: "How does a person react to a sudden, loud noise behind them?",
+        answers: [
+          { text: "Spin around quickly, ready for action.", char: "A" },
+          { text: "Jump 5 feet in the air with a yelp.", char: "B" },
+          { text: "Turn around slowly and politely ask what the matter is.", char: "C" },
+          { text: "Turn around and glare, annoyed by the interruption.", char: "D" },
+          { text: "Assume it's just something fun happening and smile.", char: "E" },
+          { text: "Analyze the sound wave patterns to identify the source.", char: "F" }
+        ]
+      },
+      {
+        number: 8,
+        text: "What is the greatest strength?",
+        answers: [
+          { text: "Bravery and persistence.", char: "A" },
+          { text: "Loyalty and cautious optimism.", char: "B" },
+          { text: "Diplomacy and empathy.", char: "C" },
+          { text: "Determination and power.", char: "D" },
+          { text: "Friendliness and a hearty appetite for life.", char: "E" },
+          { text: "Resourcefulness and attention to detail.", char: "F" }
+        ]
+      },
+      {
+        number: 9,
+        text: "Your house is filling up with water. You need to gather one item before you escape:",
+        answers: [
+          { text: "Your favorite hat.", char: "A" },
+          { text: "A flashlight and a map.", char: "B" },
+          { text: "A cherished photo album.", char: "C" },
+          { text: "Your favorite piece of battle gear.", char: "D" },
+          { text: "Your favorite snack.", char: "E" },
+          { text: "Your emergency survival kit.", char: "F" }
+        ]
+      }
+    ];
+    
+    const characterMapping = {
+      "A": { name: "Mario", drink: "Macho Man" },
+      "B": { name: "Luigi", drink: "Bench Warmer" },
+      "C": { name: "Peach", drink: "Atomic Blonde" },
+      "D": { name: "Bowser", drink: "Fire Drill" },
+      "E": { name: "Yoshi", drink: "Hulk Hogan" },
+      "F": { name: "Toad", drink: "Good Ol' Days" }
+    };
+    
+    let currentQuestion = 0;
+    let answers = [];
+    
+    // Shuffle function
+    function shuffle(array) {
+      const newArray = [...array];
+      for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+      }
+      return newArray;
+    }
+    
+    function displayQuestion() {
+      const question = questions[currentQuestion];
+      const shuffledAnswers = shuffle(question.answers);
+      
+      document.getElementById('progress').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+      
+      let html = `
+        <div class="question-container">
+          <div class="question-number">Question ${question.number}</div>
+          <div class="question-text">${question.text}</div>
+      `;
+      
+      shuffledAnswers.forEach((answer, index) => {
+        html += `
+          <div class="answer-option" onclick="selectAnswer('${answer.char}', ${index})">
+            ${answer.text}
+          </div>
+        `;
+      });
+      
+      html += `</div>`;
+      
+      document.getElementById('questionContainer').innerHTML = html;
+      document.getElementById('nextBtn').disabled = true;
+    }
+    
+    function selectAnswer(char, index) {
+      // Remove previous selection
+      document.querySelectorAll('.answer-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+      
+      // Add selection to clicked answer
+      document.querySelectorAll('.answer-option')[index].classList.add('selected');
+      
+      // Store the answer
+      answers[currentQuestion] = char;
+      
+      // Enable next button
+      document.getElementById('nextBtn').disabled = false;
+    }
+    
+    function nextQuestion() {
+      currentQuestion++;
+      
+      if (currentQuestion < questions.length) {
+        displayQuestion();
+      } else {
+        showResults();
+      }
+    }
+    
+    function showResults() {
+      // Count character occurrences
+      const counts = {};
+      answers.forEach(char => {
+        counts[char] = (counts[char] || 0) + 1;
+      });
+      
+      // Find the character with most answers
+      let maxCount = 0;
+      let resultChar = "A";
+      for (const char in counts) {
+        if (counts[char] > maxCount) {
+          maxCount = counts[char];
+          resultChar = char;
+        }
+      }
+      
+      const result = characterMapping[resultChar];
+      
+      // Display result
+      document.getElementById('quizContainer').style.display = 'none';
+      document.getElementById('resultContainer').style.display = 'block';
+      document.getElementById('resultCharacter').textContent = `You are ${result.name}!`;
+      document.getElementById('resultDrink').textContent = `Your drink: ${result.drink}`;
+    }
+    
+    function restartQuiz() {
+      currentQuestion = 0;
+      answers = [];
+      document.getElementById('quizContainer').style.display = 'block';
+      document.getElementById('resultContainer').style.display = 'none';
+      displayQuestion();
+    }
+    
+    // Initialize quiz
+    displayQuestion();
+  </script>
+</body>
+</html>

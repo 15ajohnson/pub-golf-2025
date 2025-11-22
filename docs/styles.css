@@ -67,12 +67,32 @@ nav.app-nav ul {
   flex-direction: row !important;
   flex-wrap: wrap !important;
   gap: 1rem !important;
-  align-items: center !important;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 nav.app-nav li {
   display: inline-block !important;
   margin: 0 !important;
+}
+
+nav.app-nav a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+nav.app-nav a img {
+  height: 24px !important;
+  width: auto !important;
+  vertical-align: middle !important;
+}
+
+nav.app-nav a:hover,
+nav.app-nav a:active,
+nav.app-nav a:visited,
+nav.app-nav a:focus {
+  color: inherit !important;
+  text-decoration: none !important;
 }
 
 /* External stylesheet for docs/index.html */
@@ -213,6 +233,16 @@ section.cover .cover-main a.retro-blink-button {
   opacity: 0.9;
 }
 
+/* Add space for navbar */
+main {
+  padding-top: 100px !important;
+}
+
+nav.app-nav {
+  max-height: 100px !important;
+  overflow: hidden !important;
+}
+
 /* Retro pixel-art frame for the main markdown content area (CSS-only stepped effect) */
 .markdown-section {
   position: relative;
@@ -225,6 +255,24 @@ section.cover .cover-main a.retro-blink-button {
 
 .markdown-section > * { position: relative; z-index: 1; }
 
+/* Override markdown-section styling for scorecard, quiz, and trivia pages */
+.markdown-section:has(#scorecard-page),
+.markdown-section:has(#quiz-page),
+.markdown-section:has(#trivia-page) {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Override section-box styling for scorecard, quiz, and trivia pages */
+.markdown-section:has(#scorecard-page) .section-box,
+.markdown-section:has(#quiz-page) .section-box,
+.markdown-section:has(#trivia-page) .section-box {
+  background: transparent !important;
+  border: none !important;
+  max-width: 100% !important;
+}
+
 /* Section wrapper for h2 and content */
 .section-box {
   position: relative;
@@ -235,6 +283,30 @@ section.cover .cover-main a.retro-blink-button {
   border: 2px solid transparent;
   border-radius: 4px;
   background-clip: padding-box;
+}
+
+/* Final scores link styling */
+.final-scores-link {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.final-scores-link a {
+  display: inline-block;
+  padding: 0.5rem;
+  background: linear-gradient(135deg, #4ade80, #22c55e);
+  color: white !important;
+  text-decoration: none !important;
+  border-radius: 8px;
+  font-size: 1.3rem;
+  font-weight: bold !important;
+  box-shadow: 0 4px 12px rgba(74, 222, 128, 0.4);
+  transition: transform 0.2s;
+}
+
+.final-scores-link a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(74, 222, 128, 0.6);
 }
 
 .section-box::before {
@@ -389,4 +461,20 @@ h1 {
     padding-left: 5% !important;
     padding-right: 5% !important;
   }
+  
+  /* Ensure scorecard, quiz, and trivia pages are full width on mobile */
+  .markdown-section:has(#scorecard-page),
+  .markdown-section:has(#quiz-page),
+  .markdown-section:has(#trivia-page) {
+    max-width: 100% !important;
+  }
+  
+  /* Override section-box mobile styles for scorecard, quiz, and trivia pages */
+  .markdown-section:has(#scorecard-page) .section-box,
+  .markdown-section:has(#quiz-page) .section-box,
+  .markdown-section:has(#trivia-page) .section-box {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  
 }

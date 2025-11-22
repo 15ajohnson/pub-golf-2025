@@ -340,7 +340,7 @@ article:has(#trivia-page) {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: 1000;
+  z-index: 9999;
   background: rgba(255, 154, 193, 0.9) !important;
   color: white !important;
   padding: 10px 15px !important;
@@ -350,6 +350,7 @@ article:has(#trivia-page) {
   font-size: 1.2rem !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
+  pointer-events: auto;
 }
 
 .go-to-top-btn:hover {

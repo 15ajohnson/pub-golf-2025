@@ -46,6 +46,35 @@
       }
       window.addEventListener('scroll', onScroll, { passive: true });
     })();
+    
+    // Add Go to Top button for scorecard, quiz, and trivia pages
+    window.$docsify.plugins = [].concat(window.$docsify.plugins || [], [
+      function(hook) {
+        hook.doneEach(function() {
+          // Check if we're on scorecard, quiz, or trivia page
+          const hasSpecialPage = document.querySelector('#scorecard-page, #quiz-page, #trivia-page');
+          
+          // Remove existing button if present
+          const existingBtn = document.querySelector('.go-to-top-btn-js');
+          if (existingBtn) {
+            existingBtn.remove();
+          }
+          
+          // Add button if on special page
+          if (hasSpecialPage) {
+            const btn = document.createElement('a');
+            btn.href = 'javascript:void(0);';
+            btn.className = 'go-to-top-btn go-to-top-btn-js';
+            btn.textContent = '↑ TOP';
+            btn.onclick = function() {
+              window.scrollTo({top: 0, behavior: 'smooth'});
+              return false;
+            };
+            document.body.appendChild(btn);
+          }
+        });
+      }
+    ]);
   </script>
 </body>
 </html>
